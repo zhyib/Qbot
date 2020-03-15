@@ -1,5 +1,10 @@
 import cc.moecraft.icq.*;
+import cc.moecraft.icq.sender.IcqHttpApi;
+import command.CommandBaidu;
+import command.CommandBilibili;
 import command.CommandSay;
+import listener.ListenerChat;
+import listener.ListenerCommand;
 
 public class Qbot
 {
@@ -12,22 +17,27 @@ public class Qbot
         bot.addAccount("Bot01", "127.0.0.1", 31091);
 
         // 注册事件监听器, 可以注册多个监听器
-//        bot.getEventManager().registerListeners(
-//                new TestListener(),
-//                new RequestListener(),
-//                new ExceptionListener()
-//        );
+        bot.getEventManager().registerListeners(
+                new ListenerChat(),
+                new ListenerCommand()
+        );
 
         // 启用指令管理器
         // 这些字符串是指令前缀, 比如指令"!help"的前缀就是"!"
-        bot.enableCommandManager("bot -", "!", "/", "~");
+        bot.enableCommandManager("--", "!", "/", "~");
 
         // 注册指令, 可以注册多个指令
         bot.getCommandManager().registerCommands(
-                new CommandSay()
+                new CommandSay(),
+                new CommandBaidu(),
+                new CommandBilibili()
         );
 
         // 启动机器人, 不会占用主线程
         bot.startBot();
+
+        // 获取账号
+        IcqHttpApi icqHttpApi = bot.getAccountManager().getNonAccountSpecifiedApi();
+        icqHttpApi.sendGroupMsg(166795834, "Qbot 启动完成");
     }
 }
