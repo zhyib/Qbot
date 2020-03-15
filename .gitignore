@@ -2,3 +2,4 @@
 logs
 target
 src/main/java/word/*.java
+out
