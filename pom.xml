@@ -21,5 +21,10 @@
             <artifactId>PicqBotX</artifactId>
             <version>4.12.0.1019.PRE</version>
         </dependency>
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.61</version>
+        </dependency>
     </dependencies>
 </project>
