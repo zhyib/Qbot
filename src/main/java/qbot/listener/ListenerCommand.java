@@ -1,4 +1,4 @@
-package listener;
+package qbot.listener;
 
 import cc.moecraft.icq.event.EventHandler;
 import cc.moecraft.icq.event.IcqListener;

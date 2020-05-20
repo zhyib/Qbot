@@ -1,16 +1,20 @@
-import cc.moecraft.icq.*;
-import cc.moecraft.icq.sender.IcqHttpApi;
-import command.CommandBaidu;
-import command.CommandBilibili;
-import command.CommandSay;
-import command.CommandSteam;
-import listener.ListenerChat;
-import listener.ListenerCommand;
+package qbot;
 
-public class Qbot
-{
-    public static void main(String[] args)
-    {
+import cc.moecraft.icq.PicqBotX;
+import cc.moecraft.icq.PicqConfig;
+import cc.moecraft.icq.sender.IcqHttpApi;
+import qbot.command.*;
+import qbot.listener.ListenerChat;
+import qbot.listener.ListenerCommand;
+import qbot.task.Timer;
+import qbot.util.TimeSet;
+
+import java.util.ArrayList;
+
+public class Qbot {
+    public static ArrayList<TimeSet> timeSets = new ArrayList<TimeSet>();
+
+    public static void main(String[] args) {
         // 创建机器人对象 ( 传入配置 )
         PicqBotX bot = new PicqBotX(new PicqConfig(31092).setDebug(true));
 
@@ -32,7 +36,8 @@ public class Qbot
                 new CommandSay(),
                 new CommandBaidu(),
                 new CommandBilibili(),
-                new CommandSteam()
+                new CommandSteam(),
+                new CommandReminder()
         );
 
         // 启动机器人, 不会占用主线程
@@ -40,7 +45,9 @@ public class Qbot
 
         // 获取账号
         IcqHttpApi icqHttpApi = bot.getAccountManager().getNonAccountSpecifiedApi();
-//        icqHttpApi.sendGroupMsg(166795834, "Qbot 启动完成");
+
+        Timer timer = new Timer(timeSets, icqHttpApi);
+
         System.out.println("Qbot 启动完成");
     }
 }

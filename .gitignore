@@ -1,5 +1,5 @@
 .idea
 logs
 target
-src/main/java/word/*.java
+src/main/java/qbot.word/*.java
 out

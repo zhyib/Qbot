@@ -1,4 +1,4 @@
-package command;
+package qbot.command;
 
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;

@@ -1,4 +1,4 @@
-package component;
+package qbot.component;
 
 public class Game {
     private int appid;

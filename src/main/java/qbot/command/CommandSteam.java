@@ -1,4 +1,4 @@
-package command;
+package qbot.command;
 
 import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
@@ -6,7 +6,7 @@ import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.user.User;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import component.Game;
+import qbot.component.Game;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
