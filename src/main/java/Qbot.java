@@ -6,7 +6,6 @@ import command.CommandSay;
 import command.CommandSteam;
 import listener.ListenerChat;
 import listener.ListenerCommand;
-import org.omg.Messaging.SYNC_WITH_TRANSPORT;
 
 public class Qbot
 {
