@@ -6,6 +6,7 @@ import cc.moecraft.icq.sender.IcqHttpApi;
 import qbot.command.*;
 import qbot.listener.ListenerChat;
 import qbot.listener.ListenerCommand;
+import qbot.listener.ListenerRepeater;
 import qbot.task.Timer;
 import qbot.util.TimeSet;
 
@@ -13,6 +14,9 @@ import java.util.ArrayList;
 
 public class Qbot {
     public static ArrayList<TimeSet> timeSets = new ArrayList<TimeSet>();
+    public static String lastWord = "";
+    public int repeatTimes = 0;
+    public long lastQ = 0;
 
     public static void main(String[] args) {
         // 创建机器人对象 ( 传入配置 )
@@ -24,7 +28,8 @@ public class Qbot {
         // 注册事件监听器, 可以注册多个监听器
         bot.getEventManager().registerListeners(
                 new ListenerChat(),
-                new ListenerCommand()
+                new ListenerCommand(),
+                new ListenerRepeater()
         );
 
         // 启用指令管理器
