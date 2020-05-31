@@ -3,7 +3,9 @@ package qbot;
 import cc.moecraft.icq.PicqBotX;
 import cc.moecraft.icq.PicqConfig;
 import cc.moecraft.icq.sender.IcqHttpApi;
-import qbot.command.*;
+import qbot.command.CommandMute;
+import qbot.command.CommandReminder;
+import qbot.command.CommandSay;
 import qbot.listener.ListenerChat;
 import qbot.listener.ListenerCommand;
 import qbot.listener.ListenerRepeater;
@@ -39,10 +41,8 @@ public class Qbot {
         // 注册指令, 可以注册多个指令
         bot.getCommandManager().registerCommands(
                 new CommandSay(),
-                new CommandBaidu(),
-                new CommandBilibili(),
-                new CommandSteam(),
-                new CommandReminder()
+                new CommandReminder(),
+                new CommandMute()
         );
 
         // 启动机器人, 不会占用主线程

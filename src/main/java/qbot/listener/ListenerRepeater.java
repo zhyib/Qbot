@@ -13,6 +13,7 @@ public class ListenerRepeater extends IcqListener {
         if (event.getSender().getId() != 259232161L) {
             if (event.getMessage().equals(Qbot.lastWord)) {
                 icqHttpApi.sendGroupMsg(event.getGroupId(), event.getMessage());
+                Qbot.lastWord = "";
             } else {
                 Qbot.lastWord = event.getMessage();
             }

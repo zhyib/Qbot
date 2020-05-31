@@ -3,7 +3,7 @@ package qbot.word;
 import java.util.HashMap;
 
 public class Reply {
-    public String[][][] pair = {
+    public static String[][][] wordsPair = {
             {{"测试"}, {"ACK"}},
             {{"给我买"}, {"我的呢我的呢"}},
             {{"氪"}, {"氪，都可以氪"}},

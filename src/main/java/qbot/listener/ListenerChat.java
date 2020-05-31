@@ -7,11 +7,9 @@ import cc.moecraft.icq.sender.IcqHttpApi;
 
 import java.util.Random;
 
-public class ListenerChat extends IcqListener
-{
+public class ListenerChat extends IcqListener {
     @EventHandler
-    public void autoReply(EventGroupMessage event)
-    {
+    public void autoReply(EventGroupMessage event) {
         IcqHttpApi icqHttpApi = event.getHttpApi();
         Random random = new Random();
 
@@ -26,8 +24,7 @@ public class ListenerChat extends IcqListener
     }
 
     @EventHandler
-    public void wholeReply(EventGroupMessage event)
-    {
+    public void wholeReply(EventGroupMessage event) {
         IcqHttpApi icqHttpApi = event.getHttpApi();
         Random random = new Random();
 
@@ -53,6 +50,28 @@ public class ListenerChat extends IcqListener
         }
     }
 
+    @EventHandler
+    public void singleReply(EventGroupMessage event) {
+        Random random = new Random();
+        IcqHttpApi icqHttpApi = event.getHttpApi();
+        char head = event.getMessage().charAt(0);
+        String follows = event.getMessage().substring(1);
+        int index = -1;
+
+        if (head == '夸') {
+            index = 0;
+        } else if (head == '喷') {
+            index = 1;
+        }
+
+        for (String s : singleTarget) {
+            if (s.equals(follows)) {
+                icqHttpApi.sendGroupMsg(event.getGroupId(), follows + singleWord[index][random.nextInt(singleWord[index].length)]);
+                break;
+            }
+        }
+    }
+
     public static String[][][] wordsPair = {
             {{"给我买"}, {"我的呢我的呢"}},
             {{"氪"}, {"氪，都可以氪"}},
@@ -67,8 +86,8 @@ public class ListenerChat extends IcqListener
             },
             {
                     {"WS语录", "王叔语录"},
-                    {"等下，我好像撸多了", "熬夜？怎么还有弟弟熬夜的？丢人玩意", "我有钱", "学习学个屁", "我学习我快乐", "再苦不能苦游戏*再穷不能穷嘴巴"}
-            }
+                    {"等下，我好像撸多了", "熬夜？怎么还有弟弟熬夜的？丢人玩意", "我有钱", "学习学个屁", "我学习我快乐", "再苦不能苦游戏，再穷不能穷嘴巴", "信仰就是用来背板的"}
+            },
     };
 
     public static String[][][] wholePair = {
@@ -77,17 +96,15 @@ public class ListenerChat extends IcqListener
     };
 
     public static String[] copyKeyword = {
-            "TMDHS", "NB", "GB", "WAMTJ", "？？？", "JY"
+            "TMDHS", "NB", "GB", "WAMTJ", "？？？", "JY",
     };
 
-    public static String[] avoidKeyword = {
-            "GBZY"
+    public static String[][] singleWord = {
+            {"NB", "天秀"},
+            {"GB", "SJL", "爬"},
     };
 
-//    public static HashMap<String, String> idUsername = new HashMap<String, String>() {
-//        {
-//            idUsername.put("826347380", "WS");
-//            idUsername.put("827783577", "MQ");
-//        }
-//    };
+    public static String[] singleTarget = {
+            "WS", "MQ", "XD", "GQ", "ZY",   
+    };
 }
