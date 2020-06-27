@@ -13,6 +13,7 @@ import qbot.task.Timer;
 import qbot.util.TimeSet;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Qbot {
     public static ArrayList<TimeSet> timeSets = new ArrayList<TimeSet>();
@@ -52,6 +53,12 @@ public class Qbot {
         IcqHttpApi icqHttpApi = bot.getAccountManager().getNonAccountSpecifiedApi();
 
         Timer timer = new Timer(timeSets, icqHttpApi);
+        Calendar calendar = Calendar.getInstance();
+        if (calendar.get(Calendar.HOUR_OF_DAY) <= 18 && calendar.get(Calendar.HOUR_OF_DAY) >= 6) {
+            icqHttpApi.sendGroupMsg(166795834, "米娜桑，哦哈哟~");
+        } else {
+            icqHttpApi.sendGroupMsg(166795834, "米娜桑，空邦哇~");
+        }
 
         System.out.println("Qbot 启动完成");
     }
