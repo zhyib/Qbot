@@ -6,6 +6,7 @@ import cc.moecraft.icq.sender.IcqHttpApi;
 import qbot.command.CommandMute;
 import qbot.command.CommandReminder;
 import qbot.command.CommandSay;
+import qbot.command.CommandWs;
 import qbot.listener.ListenerChat;
 import qbot.listener.ListenerCommand;
 import qbot.listener.ListenerRepeater;
@@ -43,7 +44,8 @@ public class Qbot {
         bot.getCommandManager().registerCommands(
                 new CommandSay(),
                 new CommandReminder(),
-                new CommandMute()
+                new CommandMute(),
+                new CommandWs()
         );
 
         // 启动机器人, 不会占用主线程
