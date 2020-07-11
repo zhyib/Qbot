@@ -25,7 +25,7 @@ public class CommandDetect implements EverywhereCommand {
         for (Long l : ChatLog.chatLogQueue) {
             for (int i = 0; i < userCounter.length; i++) {
                 if (l == userId[i]) {
-                    userCounter[i]++;
+                    userCounter[i] += 1 * ( 1.4 - i * 0.1);
                 }
             }
         }
@@ -61,6 +61,6 @@ public class CommandDetect implements EverywhereCommand {
     }
 
     public CommandProperties properties() {
-        return new CommandProperties("JL", "检测浓度");
+        return new CommandProperties("JL", "检测浓度", "浓度检测");
     }
 }

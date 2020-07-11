@@ -52,7 +52,8 @@ public class Qbot {
                 new CommandMute(),
                 new CommandWs(),
                 new CommandDetect(),
-                new CommandNews()
+                new CommandNews(),
+                new CommandHistory()
         );
 
         // 启动机器人, 不会占用主线程

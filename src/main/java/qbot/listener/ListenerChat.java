@@ -45,7 +45,9 @@ public class ListenerChat extends IcqListener {
         for (String s : wordsCopy) {
             if (event.getMessage().contains(s)) {
                 System.out.println("CopyReply: " + s);
-                icqHttpApi.sendGroupMsg(event.getGroupId(), event.getMessage());
+                if (!event.getMessage().equals("GBZY")) {
+                    icqHttpApi.sendGroupMsg(event.getGroupId(), event.getMessage());
+                }
             }
         }
     }
@@ -62,6 +64,9 @@ public class ListenerChat extends IcqListener {
             index = 0;
         } else if (head == '喷') {
             index = 1;
+            if (follows.equals("ZY")) {
+                index = 0;
+            }
         }
 
         for (String s : singleTarget) {
