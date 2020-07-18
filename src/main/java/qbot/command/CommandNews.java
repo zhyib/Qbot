@@ -53,8 +53,9 @@ public class CommandNews implements EverywhereCommand {
         List<News> list = JSON.parseArray(inputLine, News.class);
 
         StringBuilder sb = new StringBuilder();
+        int i = 1;
         for (News n : list) {
-            sb.append(n.getTitle()).append("\n").append(n.getUrl()).append("\n\n");
+            sb.append(i++).append("、").append(n.getTitle()).append("\n");
         }
         return sb.toString();
     }
