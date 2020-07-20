@@ -20,12 +20,20 @@ public class CommandWs implements EverywhereCommand {
             "信仰就是用来背叛的",
             "理性二字，已刻在心间",
             "今天周二，跑不掉了好吧，这波记忆皇帝",
+            "学习不积极，脑子有问题",
+            "我这人没啥优点，讲诚信算是其中之一"
     };
 
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
         if (arrayList.size() == 0) {
             Random random = new Random();
             return dic[random.nextInt(dic.length)];
+        } else if (arrayList.get(0).equals("all")) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < dic.length; i++) {
+                sb.append((i + 1)).append("、").append(dic[i]).append("\n");
+            }
+            return sb.toString();
         } else {
             if (Integer.parseInt(arrayList.get(0)) >= dic.length) {
                 return "下标越界，范围为0-" + (dic.length - 1);
