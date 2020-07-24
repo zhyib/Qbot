@@ -94,10 +94,12 @@ public class ListenerChat extends IcqListener {
     public static String[][][] wholePair = {
             {{"测试"}, {"ACK"}},
             {{"输了"}, {"输了", "输的透彻"}},
+            {{"我是傻逼"}, {"你是傻逼"}},
+            {{"我懂了"}, {"你又懂了？"}}
     };
 
     public static String[] copyKeyword = {
-            "TMDHS", "NB", "GB", "WAMTJ", "？？？", "JY",
+            "TMDHS", "NB", "GB", "WAMTJ", "？？？", "JY", "你有问题", "你不对劲"
     };
 
     public static String[][] singleWord = {
