@@ -4,42 +4,61 @@ import cc.moecraft.icq.command.CommandProperties;
 import cc.moecraft.icq.command.interfaces.EverywhereCommand;
 import cc.moecraft.icq.event.events.message.EventMessage;
 import cc.moecraft.icq.user.User;
+import qbot.util.Exception;
+import qbot.util.Log;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Random;
 
 public class CommandWs implements EverywhereCommand {
 
-    private final String[] dic = {
-            "再苦不能苦游戏，再穷不能穷嘴巴",
-            "熬夜？怎么还有弟弟熬夜的？丢人玩意",
-            "我学习我快乐",
-            "学习学个屁",
-            "我有钱",
-            "等下，我好像撸多了",
-            "信仰就是用来背叛的",
-            "理性二字，已刻在心间",
-            "今天周二，跑不掉了好吧，这波记忆皇帝",
-            "学习不积极，脑子有问题",
-            "我这人没啥优点，讲诚信算是其中之一"
-    };
-
     public String run(EventMessage eventMessage, User user, String s, ArrayList<String> arrayList) {
-        if (arrayList.size() == 0) {
-            Random random = new Random();
-            return dic[random.nextInt(dic.length)];
-        } else if (arrayList.get(0).equals("all")) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < dic.length; i++) {
-                sb.append((i + 1)).append("、").append(dic[i]).append("\n");
+        Log.log(eventMessage, user, s, arrayList);
+
+        String path = "./ws.txt";
+        FileInputStream fileInputStream = null;
+        Random random = new Random();
+
+        try {
+            // read file
+            fileInputStream = new FileInputStream(path);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line = null;
+            ArrayList<String> strings = new ArrayList<String>();
+            while ((line = bufferedReader.readLine()) != null) {
+                strings.add(line);
             }
-            return sb.toString();
-        } else {
-            if (Integer.parseInt(arrayList.get(0)) >= dic.length) {
-                return "下标越界，范围为0-" + (dic.length - 1);
+            fileInputStream.close();
+
+            if (arrayList.size() >= 1) {
+                if (arrayList.get(0).equals("all")) {
+                    StringBuilder sb = new StringBuilder();
+                    for (int i = 0; i < strings.size(); i++) {
+                        sb.append((i)).append("、").append(strings.get(i)).append("\n");
+                    }
+                    return sb.toString();
+                } else {
+                    // 有下标
+                    int num = Integer.parseInt(arrayList.get(0));
+                    if (num < 0 || num > strings.size() - 1) {
+                        // 检测下标越界
+                        return Exception.INDEX_OUT_OF_BOUND(0, strings.size() - 1);
+                    } else {
+                        // 返回
+                        return strings.get(num);
+                    }
+                }
             } else {
-                return dic[Integer.parseInt(arrayList.get(0))];
+                // 没有下标，随机一个
+                return strings.get(random.nextInt(strings.size()));
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return Exception.FILE_NOT_FOUND();
         }
     }
 
